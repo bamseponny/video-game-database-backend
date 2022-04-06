@@ -1,0 +1,35 @@
+{
+  "name": "video-game-database-backend",
+  "version": "1.0.0",
+  "description": "The backend side of the Video Game Database, for the course Software Development Project (1DV613).",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon --inspect -r dotenv/config src/server.js",
+    "lint": "npx eslint ./src || exit 0",
+    "lint:fix": "npx eslint ./src --fix || exit 0",
+    "devStart": "nodemon server.js"
+  },
+  "contributors": [
+    "Fredrik Eriksson <ferth09@student.lnu.se>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.lnu.se:1dv613/student/ferth09/projects/video-game-database-backend.git"
+  },
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "helmet": "^5.0.2",
+    "mongoose": "^6.1.8",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@lnu/eslint-config": "^1.1.4",
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.15"
+  }
+}
