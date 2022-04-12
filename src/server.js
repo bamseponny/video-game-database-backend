@@ -7,6 +7,7 @@
 import { connectDB } from './config/mongoose.js'
 import express from 'express'
 import logger from 'morgan'
+import { router } from './routes/router.js'
 
 try {
   await connectDB()
@@ -20,7 +21,7 @@ try {
   app.use(express.json())
 
   // Register routes.
-  /* app.use('/', router) */
+  app.use('/', router)
 
   // Error handler.
 
