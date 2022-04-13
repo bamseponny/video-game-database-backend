@@ -29,5 +29,5 @@ export const connectDB = async () => {
   })
 
   // Connect to the server.
-  return mongoose.connect(process.env.DB_CONNECTION_STRING)
+  return mongoose.connect('mongodb+srv://bamseponny:bamseponny123@videogamedatabase.gkvpw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 }
