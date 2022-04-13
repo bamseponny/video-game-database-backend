@@ -4,6 +4,7 @@
  * @author Fredrik Eriksson
  * @version 1.0.0
  */
+
 import { connectDB } from './config/mongoose.js'
 import express from 'express'
 import logger from 'morgan'
