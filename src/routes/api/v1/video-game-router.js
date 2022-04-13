@@ -17,7 +17,7 @@ const controller = new VideoGameController()
 // List all video games of a certain format.
 router.get('/games', (req, res, next) => controller.listAllGames(req, res, next))
 
-// Add a video game to the database.
+// Create and add a video game to the database.
 router.post('/games', (req, res, next) => controller.addGame(req, res, next))
 
 // Show single game.
