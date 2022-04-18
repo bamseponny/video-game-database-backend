@@ -5,7 +5,7 @@
  * @version 1.0.0
  */
 
-import { Game } from '../../models/game.js'
+import { Game } from '../../models/Game.js'
 
 /**
  * Encapsulates a controller.
