@@ -5,7 +5,7 @@
  * @version 1.0.0
  */
 
-/* import { Game } from '../../models/game.js' */
+import { Game } from '../../models/game.js'
 
 /**
  * Encapsulates a controller.
@@ -20,5 +20,22 @@ export class VideoGameController {
    */
   async addGame (req, res, next) {
     console.log('Hoho!')
+
+    const game = new Game({
+      title: req.body.title,
+      description: req.body.description,
+      genre: req.body.genre,
+      format: req.body.format,
+      releaseYear: req.body.releaseYear,
+      developer: req.body.developer,
+      publisher: req.body.publisher,
+      imageURL: req.body.imageURL
+    })
+
+    res
+      .status(201)
+      .json(game)
+
+    await game.save()
   }
 }

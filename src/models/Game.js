@@ -46,7 +46,7 @@ const schema = new mongoose.Schema({
     ]
   },
   releaseYear: {
-    type: String,
+    type: Number,
     required: true,
     trim: true
   },
@@ -104,4 +104,4 @@ const schema = new mongoose.Schema({
 })
 
 // Create a model using the schema.
-export const Snippet = mongoose.model('Game', schema)
+export const Game = mongoose.model('Game', schema)
