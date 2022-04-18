@@ -19,23 +19,25 @@ export class VideoGameController {
    * @param {Function} next - Express next middleware function.
    */
   async addGame (req, res, next) {
-    console.log('Hoho!')
+    try {
+      const game = new Game({
+        title: req.body.title,
+        description: req.body.description,
+        genre: req.body.genre,
+        format: req.body.format,
+        releaseYear: req.body.releaseYear,
+        developer: req.body.developer,
+        publisher: req.body.publisher,
+        imageURL: req.body.imageURL
+      })
 
-    const game = new Game({
-      title: req.body.title,
-      description: req.body.description,
-      genre: req.body.genre,
-      format: req.body.format,
-      releaseYear: req.body.releaseYear,
-      developer: req.body.developer,
-      publisher: req.body.publisher,
-      imageURL: req.body.imageURL
-    })
+      res
+        .status(201)
+        .json(game)
 
-    res
-      .status(201)
-      .json(game)
-
-    await game.save()
+      await game.save()
+    } catch (error) {
+      next(error)
+    }
   }
 }
