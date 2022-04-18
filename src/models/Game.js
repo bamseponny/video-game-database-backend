@@ -60,6 +60,22 @@ const schema = new mongoose.Schema({
     required: true,
     trim: true
   },
+  nowPlaying: {
+    type: Boolean,
+    default: false
+  },
+  grade: {
+    type: Number,
+    default: 0,
+    enum: [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
   imageURL: {
     type: String,
     required: true,
