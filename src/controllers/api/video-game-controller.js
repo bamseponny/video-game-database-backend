@@ -8,9 +8,37 @@
 import { Game } from '../../models/Game.js'
 
 /**
+ * List all images.
+ *
+ * @param {object} req - Express request object.
+ * @param {object} res - Express response object.
+ * @param {Function} next - Express next middleware function.
+ */
+
+/**
  * Encapsulates a controller.
  */
 export class VideoGameController {
+/**
+ * List all images.
+ *
+ * @param {object} req - Express request object.
+ * @param {object} res - Express response object.
+ * @param {Function} next - Express next middleware function.
+ */
+  async listAllGames (req, res, next) {
+    try {
+      console.log(req.body.format)
+      const games = await Game.find({ format: req.body.format })
+
+      res
+        .status(200)
+        .json(games)
+    } catch (error) {
+      next(error)
+    }
+  }
+
   /**
    * Create and add a game to the database.
    *
