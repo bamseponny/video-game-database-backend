@@ -24,7 +24,7 @@ router.post('/games', (req, res, next) => controller.addGame(req, res, next))
 router.get('/games/:id', (req, res, next) => controller.findOneGame(req, res, next))
 
 // Edit video game.
-router.put('/games/:id', (req, res, next) => controller.updateGame(req, res, next))
+router.patch('/games/:id', (req, res, next) => controller.updateGame(req, res, next))
 
 // Delete video game.
 router.get('/games/:id', (req, res, next) => controller.deleteGame(req, res, next))

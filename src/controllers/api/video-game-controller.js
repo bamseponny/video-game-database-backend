@@ -91,4 +91,24 @@ export class VideoGameController {
       next(error)
     }
   }
+
+  /**
+   * Edit video game.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   */
+  async updateGame (req, res, next) {
+    try {
+      console.log(req.params.id)
+      const patchGame = await Game.findByIdAndUpdate({ _id: req.params.id }, req.body, { runValidators: true })
+
+      await patchGame.save()
+      res
+        .sendStatus(204)
+    } catch (error) {
+      next(error)
+    }
+  }
 }
