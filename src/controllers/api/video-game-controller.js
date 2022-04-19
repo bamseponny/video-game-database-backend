@@ -20,7 +20,7 @@ import { Game } from '../../models/Game.js'
  */
 export class VideoGameController {
 /**
- * List all images.
+ * List all video games.
  *
  * @param {object} req - Express request object.
  * @param {object} res - Express response object.
@@ -28,12 +28,17 @@ export class VideoGameController {
  */
   async listAllGames (req, res, next) {
     try {
-      console.log(req.body.format)
-      const games = await Game.find({ format: req.body.format })
-
-      res
-        .status(200)
-        .json(games)
+      if (req.body.format) {
+        const games = await Game.find({ format: req.body.format })
+        res
+          .status(200)
+          .json(games)
+      } else if (req.body.year) {
+        const games = await Game.find({ releaseYear: req.body.year })
+        res
+          .status(200)
+          .json(games)
+      }
     } catch (error) {
       next(error)
     }
@@ -64,6 +69,24 @@ export class VideoGameController {
         .json(game)
 
       await game.save()
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  /**
+   * Show single video game.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   */
+  async findOneGame (req, res, next) {
+    try {
+      const game = await Game.find({ _id: req.params.id })
+      res
+        .status(200)
+        .json(game)
     } catch (error) {
       next(error)
     }

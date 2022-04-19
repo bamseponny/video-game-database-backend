@@ -14,17 +14,17 @@ const controller = new VideoGameController()
 
 // Map HTTP verbs and route paths to controller actions.
 
-// List all video games of a certain format.
+// List all video games.
 router.get('/games', (req, res, next) => controller.listAllGames(req, res, next))
 
 // Create and add a video game to the database.
 router.post('/games', (req, res, next) => controller.addGame(req, res, next))
 
-// Show single game.
+// Show single video game.
 router.get('/games/:id', (req, res, next) => controller.findOneGame(req, res, next))
 
-// Edit game.
+// Edit video game.
 router.put('/games/:id', (req, res, next) => controller.updateGame(req, res, next))
 
-// Delete game.
+// Delete video game.
 router.get('/games/:id', (req, res, next) => controller.deleteGame(req, res, next))
