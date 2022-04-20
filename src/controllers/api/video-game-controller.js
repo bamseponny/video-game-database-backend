@@ -29,12 +29,17 @@ export class VideoGameController {
   async listAllGames (req, res, next) {
     try {
       if (req.body.format) {
-        const games = await Game.find({ format: req.body.format })
+        const games = await Game.find({ format: req.body.format }).sort({ title: 1 })
         res
           .status(200)
           .json(games)
       } else if (req.body.year) {
-        const games = await Game.find({ releaseYear: req.body.year })
+        const games = await Game.find({ releaseYear: req.body.year }).sort({ title: 1 })
+        res
+          .status(200)
+          .json(games)
+      } else if (req.body.genre) {
+        const games = await Game.find({ genre: req.body.genre }).sort({ title: 1 })
         res
           .status(200)
           .json(games)
