@@ -19,20 +19,21 @@ const schema = new mongoose.Schema({
     trim: true,
     maxlength: 500 // Behöver sannolikt justeras as fuck
   },
-  genre: {
-    type: String,
-    required: true,
-    enum: [
-      'Action',
-      'Party',
-      'Platform',
-      'Role-playing game',
-      'Horror',
-      'Sport',
-      'Strategy',
-      'Adventure'
-    ]
-  },
+  genre:
+    [{
+      type: String,
+      required: true,
+      enum: [
+        'Action',
+        'Party',
+        'Platform',
+        'Role-playing game',
+        'Survival horror',
+        'Sport',
+        'Strategy',
+        'Adventure'
+      ]
+    }],
   format: {
     type: String,
     required: true,
