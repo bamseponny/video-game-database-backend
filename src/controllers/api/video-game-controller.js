@@ -50,7 +50,7 @@ export class VideoGameController {
   }
 
   /**
-   * Create and add a game to the database.
+   * Create and add a game.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
@@ -110,6 +110,24 @@ export class VideoGameController {
       const patchGame = await Game.findByIdAndUpdate({ _id: req.params.id }, req.body, { runValidators: true })
 
       await patchGame.save()
+      res
+        .sendStatus(204)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  /**
+   * Delete video game.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   */
+  async deleteGame (req, res, next) {
+    console.log(req.params.id)
+    try {
+      await Game.findByIdAndDelete(req.params.id)
       res
         .sendStatus(204)
     } catch (error) {
