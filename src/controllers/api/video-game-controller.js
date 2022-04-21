@@ -43,6 +43,11 @@ export class VideoGameController {
         res
           .status(200)
           .json(games)
+      } else {
+        const games = await Game.find().sort({ title: 1 })
+        res
+          .status(200)
+          .json(games)
       }
     } catch (error) {
       next(error)
@@ -106,7 +111,6 @@ export class VideoGameController {
    */
   async updateGame (req, res, next) {
     try {
-      console.log(req.params.id)
       const patchGame = await Game.findByIdAndUpdate({ _id: req.params.id }, req.body, { runValidators: true })
 
       await patchGame.save()

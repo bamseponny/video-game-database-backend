@@ -21,6 +21,9 @@ try {
 
   app.use(express.json())
 
+  // Att ha till senare.
+  /* app.use(cors()) */
+
   // Register routes.
   app.use('/', router)
 
