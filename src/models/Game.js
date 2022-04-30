@@ -26,12 +26,12 @@ const schema = new mongoose.Schema({
       enum: [
         'Action',
         'Party',
-        'Platform',
-        'Role-playing game',
-        'Survival horror',
+        'Plattform',
+        'Rollspel',
+        'Skräck',
         'Sport',
-        'Strategy',
-        'Adventure'
+        'Strategi',
+        'Äventyr'
       ]
     }],
   format: {
@@ -62,6 +62,10 @@ const schema = new mongoose.Schema({
     trim: true
   },
   nowPlaying: {
+    type: Boolean,
+    default: false
+  },
+  backlog: {
     type: Boolean,
     default: false
   },
