@@ -9,6 +9,7 @@ import { connectDB } from './config/mongoose.js'
 import express from 'express'
 import logger from 'morgan'
 import { router } from './routes/router.js'
+import cors from 'cors'
 
 try {
   await connectDB()
@@ -22,7 +23,7 @@ try {
   app.use(express.json())
 
   // Att ha till senare.
-  /* app.use(cors()) */
+  app.use(cors())
 
   // Register routes.
   app.use('/', router)

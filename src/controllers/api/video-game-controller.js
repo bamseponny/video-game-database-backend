@@ -19,13 +19,13 @@ import { Game } from '../../models/Game.js'
  * Encapsulates a controller.
  */
 export class VideoGameController {
-/**
- * List all video games.
- *
- * @param {object} req - Express request object.
- * @param {object} res - Express response object.
- * @param {Function} next - Express next middleware function.
- */
+  /**
+   * List all video games.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   */
   async listAllGames (req, res, next) {
     try {
       if (req.body.format) {
@@ -40,6 +40,11 @@ export class VideoGameController {
           .json(games)
       } else if (req.body.genre) {
         const games = await Game.find({ genre: req.body.genre }).sort({ title: 1 })
+        res
+          .status(200)
+          .json(games)
+      } else if (req.body.nowPlaying) {
+        const games = await Game.find({ nowPlaying: req.body.nowPlaying }).sort({ title: 1 })
         res
           .status(200)
           .json(games)
