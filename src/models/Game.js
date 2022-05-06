@@ -29,6 +29,7 @@ const schema = new mongoose.Schema({
         'Plattform',
         'Onlinerollspel',
         'Rollspel',
+        'Simulation',
         'Skräck',
         'Sport',
         'Strategi',
