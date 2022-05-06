@@ -27,6 +27,7 @@ const schema = new mongoose.Schema({
         'Action',
         'Party',
         'Plattform',
+        'Onlinerollspel',
         'Rollspel',
         'Skräck',
         'Sport',
@@ -68,6 +69,10 @@ const schema = new mongoose.Schema({
   backlog: {
     type: Boolean,
     default: false
+  },
+  series: {
+    type: String,
+    default: null
   },
   grade: {
     type: Number,
