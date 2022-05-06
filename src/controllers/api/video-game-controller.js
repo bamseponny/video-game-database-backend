@@ -48,6 +48,11 @@ export class VideoGameController {
         res
           .status(200)
           .json(games)
+      } else if (req.body.backlog) {
+        const games = await Game.find({ nowPlaying: req.body.nowPlaying }).sort({ title: 1 })
+        res
+          .status(200)
+          .json(games)
       } else {
         const games = await Game.find().sort({ title: 1 })
         res
