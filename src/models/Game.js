@@ -11,6 +11,7 @@ const schema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
+    unique: true,
     trim: true
   },
   description: {
@@ -25,9 +26,11 @@ const schema = new mongoose.Schema({
       required: true,
       enum: [
         'Action',
+        'Onlinerollspel',
         'Party',
         'Plattform',
-        'Onlinerollspel',
+        'Pussel',
+        'Racing',
         'Rollspel',
         'Simulation',
         'Skräck',
@@ -36,7 +39,7 @@ const schema = new mongoose.Schema({
         'Äventyr'
       ]
     }],
-  format: {
+  format: [{
     type: String,
     required: true,
     enum: [
@@ -47,22 +50,22 @@ const schema = new mongoose.Schema({
       'Xbox One',
       'Xbox Series X|S'
     ]
-  },
+  }],
   releaseYear: {
     type: Number,
     required: true,
     trim: true
   },
-  developer: {
+  developer: [{
     type: String,
     required: true,
     trim: true
-  },
-  publisher: {
+  }],
+  publisher: [{
     type: String,
     required: true,
     trim: true
-  },
+  }],
   nowPlaying: {
     type: Boolean,
     default: false
@@ -77,7 +80,6 @@ const schema = new mongoose.Schema({
   },
   grade: {
     type: Number,
-    default: 0,
     enum: [
       0,
       1,
@@ -88,6 +90,11 @@ const schema = new mongoose.Schema({
     ]
   },
   imageURL: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  videoURL: {
     type: String,
     required: true,
     trim: true
