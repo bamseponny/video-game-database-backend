@@ -99,6 +99,10 @@ const schema = new mongoose.Schema({
     required: true,
     trim: true
   },
+  quote: {
+    type: String,
+    trim: true
+  },
   date: {
     type: Date,
     default: Date.now
