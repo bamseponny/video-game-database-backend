@@ -26,7 +26,7 @@ export class VideoGameController {
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
-  async listAllGames(req, res, next) {
+  async listAllGames (req, res, next) {
     try {
       if (req.body.format) {
         const games = await Game.find({ format: req.body.format }).sort({ title: 1 })
@@ -71,7 +71,7 @@ export class VideoGameController {
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
-  async addGame(req, res, next) {
+  async addGame (req, res, next) {
     try {
       const game = new Game({
         title: req.body.title,
@@ -86,7 +86,7 @@ export class VideoGameController {
         grade: req.body.grade,
         imageURL: req.body.imageURL,
         videoURL: req.body.videoURL,
-        quoute: req.body.quote
+        quote: req.body.quote
       })
 
       res
@@ -106,7 +106,7 @@ export class VideoGameController {
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
-  async findOneGame(req, res, next) {
+  async findOneGame (req, res, next) {
     try {
       const game = await Game.find({ _id: req.params.id })
       res
@@ -124,7 +124,7 @@ export class VideoGameController {
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
-  async updateGame(req, res, next) {
+  async updateGame (req, res, next) {
     try {
       const patchGame = await Game.findByIdAndUpdate({ _id: req.params.id }, req.body, { runValidators: true })
 
@@ -143,7 +143,7 @@ export class VideoGameController {
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
-  async deleteGame(req, res, next) {
+  async deleteGame (req, res, next) {
     console.log(req.params.id)
     try {
       await Game.findByIdAndDelete(req.params.id)
