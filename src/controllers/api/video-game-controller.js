@@ -6,19 +6,49 @@
  */
 
 import { Game } from '../../models/Game.js'
-
-/**
- * List all images.
- *
- * @param {object} req - Express request object.
- * @param {object} res - Express response object.
- * @param {Function} next - Express next middleware function.
- */
+import createError from 'http-errors'
+import { initializeApp } from 'firebase-admin/app'
+import { getAuth } from 'firebase-admin/auth'
+import firebase from 'firebase-admin'
+import firebaseConfig from '../../config/firebase-config.js'
 
 /**
  * Encapsulates a controller.
  */
 export class VideoGameController {
+  /**
+   * Authenticates a user.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   */
+  async authenticate (req, res, next) {
+    try {
+      if (firebase.apps.length === 0) {
+        initializeApp({
+          credential: firebase.credential.cert(firebaseConfig)
+        })
+        console.log(req.headers.authorization)
+      }
+      console.log(firebase.app)
+      const header = req.headers?.authorization
+
+      if (header !== 'Bearer null' && req.headers?.authorization?.startsWith('Bearer ')) {
+        console.log('ÄR VI HÄR!?')
+        const idToken = req.headers.authorization.split('Bearer ')[1]
+        const decodedToken = await getAuth().verifyIdToken(idToken)
+        console.log(decodedToken)
+      }
+
+      next()
+    } catch (err) {
+      console.log(err)
+      const error = createError(401)
+      next(error)
+    }
+  }
+
   /**
    * List all video games.
    *
@@ -26,7 +56,7 @@ export class VideoGameController {
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
-  async listAllGames (req, res, next) {
+  async listAllGames(req, res, next) {
     try {
       if (req.body.format) {
         const games = await Game.find({ format: req.body.format }).sort({ title: 1 })
@@ -71,7 +101,7 @@ export class VideoGameController {
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
-  async addGame (req, res, next) {
+  async addGame(req, res, next) {
     try {
       const game = new Game({
         title: req.body.title,
@@ -106,7 +136,7 @@ export class VideoGameController {
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
-  async findOneGame (req, res, next) {
+  async findOneGame(req, res, next) {
     try {
       const game = await Game.find({ _id: req.params.id })
       res
@@ -124,7 +154,7 @@ export class VideoGameController {
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
-  async updateGame (req, res, next) {
+  async updateGame(req, res, next) {
     try {
       const patchGame = await Game.findByIdAndUpdate({ _id: req.params.id }, req.body, { runValidators: true })
 
@@ -143,7 +173,7 @@ export class VideoGameController {
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
-  async deleteGame (req, res, next) {
+  async deleteGame(req, res, next) {
     console.log(req.params.id)
     try {
       await Game.findByIdAndDelete(req.params.id)
