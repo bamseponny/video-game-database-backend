@@ -20,7 +20,7 @@ router.get('/games',
 
 // Create and add a video game to the database.
 router.post('/games',
-  (req, res, next) => controller.authenticate(req, res, next),
+  /* (req, res, next) => controller.authenticate(req, res, next), */
   (req, res, next) => controller.addGame(req, res, next))
 
 // Show single video game from the database.
