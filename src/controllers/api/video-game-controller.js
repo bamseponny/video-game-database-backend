@@ -23,7 +23,7 @@ export class VideoGameController {
    * @param {object} res - Express response object.
    * @param {Function} next - Express next middleware function.
    */
-  async authenticate (req, res, next) {
+  async authenticate(req, res, next) {
     try {
       if (firebase.apps.length === 0) {
         initializeApp({
@@ -39,9 +39,8 @@ export class VideoGameController {
         const idToken = req.headers.authorization.split('Bearer ')[1]
         const decodedToken = await getAuth().verifyIdToken(idToken)
         console.log(decodedToken)
+        next()
       }
-
-      next()
     } catch (err) {
       console.log(err)
       const error = createError(401)
