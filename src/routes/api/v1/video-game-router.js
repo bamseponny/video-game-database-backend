@@ -29,10 +29,10 @@ router.get('/games/:id',
 
 // Edit video game in the database.
 router.patch('/games/:id',
-  /* (req, res, next) => controller.authenticate(req, res, next), */
+  (req, res, next) => controller.authenticate(req, res, next),
   (req, res, next) => controller.updateGame(req, res, next))
 
 // Delete video game from the database.
 router.delete('/games/:id',
-  /* (req, res, next) => controller.authenticate(req, res, next), */
+  (req, res, next) => controller.authenticate(req, res, next),
   (req, res, next) => controller.deleteGame(req, res, next))
