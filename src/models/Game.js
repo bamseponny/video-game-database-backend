@@ -18,7 +18,7 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    maxlength: 700 // Behöver sannolikt justeras as fuck
+    maxlength: 425
   },
   genre:
     [{
@@ -101,7 +101,8 @@ const schema = new mongoose.Schema({
   },
   quote: {
     type: String,
-    trim: true
+    trim: true,
+    maxlength: 70
   },
   date: {
     type: Date,
