@@ -35,7 +35,6 @@ export class VideoGameController {
       const header = req.headers?.authorization
 
       if (header !== 'Bearer null' && req.headers?.authorization?.startsWith('Bearer ')) {
-        console.log('ÄR VI HÄR!?')
         const idToken = req.headers.authorization.split('Bearer ')[1]
         const decodedToken = await getAuth().verifyIdToken(idToken)
         console.log(decodedToken)
@@ -82,13 +81,9 @@ export class VideoGameController {
         res
           .status(200)
           .json(games)
-      } else {
-        const games = await Game.find().sort({ title: 1 })
-        res
-          .status(200)
-          .json(games)
       }
-    } catch (error) {
+    } catch (err) {
+      const error = createError(500)
       next(error)
     }
   }
@@ -118,12 +113,15 @@ export class VideoGameController {
         quote: req.body.quote
       })
 
+      await game.save()
+
       res
         .status(201)
         .json(game)
 
       await game.save()
-    } catch (error) {
+    } catch (err) {
+      const error = createError(400)
       next(error)
     }
   }
@@ -137,11 +135,19 @@ export class VideoGameController {
    */
   async findOneGame (req, res, next) {
     try {
+      const doesGameExist = await Game.exists({ _id: req.params.id })
       const game = await Game.find({ _id: req.params.id })
-      res
-        .status(200)
-        .json(game)
-    } catch (error) {
+      console.log(doesGameExist)
+      if (doesGameExist !== null) {
+        res
+          .status(200)
+          .json(game)
+      } else if (doesGameExist === null) {
+        const error = createError(404)
+        next(error)
+      }
+    } catch (err) {
+      const error = createError(500)
       next(error)
     }
   }
@@ -160,7 +166,8 @@ export class VideoGameController {
       await patchGame.save()
       res
         .sendStatus(204)
-    } catch (error) {
+    } catch (err) {
+      const error = createError(400)
       next(error)
     }
   }
@@ -173,12 +180,19 @@ export class VideoGameController {
    * @param {Function} next - Express next middleware function.
    */
   async deleteGame (req, res, next) {
-    console.log(req.params.id)
     try {
-      await Game.findByIdAndDelete(req.params.id)
-      res
-        .sendStatus(204)
-    } catch (error) {
+      const doesGameExist = await Game.exists({ _id: req.params.id })
+
+      if (doesGameExist !== null) {
+        await Game.findByIdAndDelete(req.params.id)
+        res
+          .sendStatus(204)
+      } else if (doesGameExist === null) {
+        const error = createError(404)
+        next(error)
+      }
+    } catch (err) {
+      const error = createError(404)
       next(error)
     }
   }

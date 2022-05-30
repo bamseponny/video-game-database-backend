@@ -18,7 +18,7 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    maxlength: 425
+    maxlength: [425, 'The description must be a maximum of 425 characters.']
   },
   genre:
     [{
@@ -102,7 +102,7 @@ const schema = new mongoose.Schema({
   quote: {
     type: String,
     trim: true,
-    maxlength: 70
+    maxlength: [70, 'The description must be a maximum of 70 characters.']
   },
   date: {
     type: Date,
