@@ -21,24 +21,25 @@ const schema = new mongoose.Schema({
     maxlength: [425, 'The description must be a maximum of 425 characters.']
   },
   genre:
-    [{
-      type: String,
-      required: true,
-      enum: [
-        'Action',
-        'Onlinerollspel',
-        'Party',
-        'Plattform',
-        'Pussel',
-        'Racing',
-        'Rollspel',
-        'Simulation',
-        'Skräck',
-        'Sport',
-        'Strategi',
-        'Äventyr'
-      ]
-    }],
+  {
+    type: String,
+    required: true,
+    enum: [
+      'Action',
+      'Actionrollspel',
+      'Onlinerollspel',
+      'Party',
+      'Plattform',
+      'Pussel',
+      'Racing',
+      'Rollspel',
+      'Simulation',
+      'Skräck',
+      'Sport',
+      'Strategi',
+      'Äventyr'
+    ]
+  },
   format: [{
     type: String,
     required: true,
