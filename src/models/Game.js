@@ -27,6 +27,7 @@ const schema = new mongoose.Schema({
       enum: [
         'Action',
         'Actionrollspel',
+        'Actionäventyr',
         'Onlinerollspel',
         'Party',
         'Plattform',
