@@ -46,6 +46,7 @@ const schema = new mongoose.Schema({
     required: true,
     enum: [
       'Pc',
+      'Nintendo 3DS',
       'Nintendo Switch',
       'Playstation 4',
       'Playstation 5',
